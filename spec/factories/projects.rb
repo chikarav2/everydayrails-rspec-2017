@@ -25,6 +25,9 @@ FactoryBot.define do
       after(:create) { |project| create_list(:note, 5, project: project) }
     end
 
-    
+    # 無効になっている
+    trait :invalid do
+      name nil
+    end
   end
 end
