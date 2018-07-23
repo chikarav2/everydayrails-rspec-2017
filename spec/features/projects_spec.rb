@@ -4,12 +4,8 @@ RSpec.feature 'Projects', type: :feature do
   # ユーザーは新しいプロジェクトを作成する
   scenario 'user creates a new project' do
     user = FactoryBot.create(:user)
-
+    sign_in user
     visit root_path
-    click_link 'Sign in'
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Log in'
 
     expect do
       click_link 'New Project'
@@ -51,13 +47,8 @@ RSpec.feature 'Projects', type: :feature do
   # ゲストがプロジェクトを追加する
   scenario 'guest adds a project' do
     user = FactoryBot.create(:user)
+    sign_in user
 
-    visit root_path
-    click_link 'Sign in'
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Log in'
-    
     visit projects_path
     save_and_open_page
     click_link 'New Project'
